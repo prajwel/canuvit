@@ -2,3 +2,5 @@
 *ipynb
 dist
 *info
+*png
+*pycache*
