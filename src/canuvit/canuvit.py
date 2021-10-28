@@ -444,7 +444,7 @@ def im_flux(int_map, pointing_coo, instrument, m_ra, m_dec):
 
     # To read data.
     try:
-        hdu = fits.open(int_map)
+        hdu = fits.open(int_map, cache = False)
     except IOError:
         print('Incomplete FITS file. Check if Galex Servers are working properly.')
 
@@ -558,7 +558,7 @@ def td1_countfuv(flux):
     return flux, cr1, cr2, cr3, cr4
 
 # Function to do all the work on TD1_catalogue.
-def td1_estimate(pointing_coo):
+def td1_estimate(pointing_coo, instrument):
     td1_catalogue = 'td1_catalogue.fits'
     td1_hdu = fits.open(td1_catalogue)
     alpha = td1_hdu[1].data['ra']
@@ -761,7 +761,8 @@ def observe_UV(instrument, RA, DEC):
             # To read the TD1 catalogue.
             td1_catalogue = 'td1_catalogue.fits'
             td1_hdu = fits.open(td1_catalogue)
-            td1_estimate(pointing_coo)
+            td1_estimate(pointing_coo, instrument)
+            return
             
     parent = 'http://galex.stsci.edu/GR6'
     son = parent + ss[1:] 
@@ -786,7 +787,7 @@ def observe_UV(instrument, RA, DEC):
     
     if len(catalogue_link) != 0:
         try:
-            cat_hdu = fits.open(catalogue_link[0])
+            cat_hdu = fits.open(catalogue_link[0], cache = False)
         except IOError:
             incomplete_fits = 'Incomplete FITS file. Check if Galex Servers are working properly.'
             print('\n{}\n'.format(incomplete_fits))
