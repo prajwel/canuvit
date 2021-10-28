@@ -1,5 +1,7 @@
 # To check the safety of a field to be observed with UVIT.
 
+![](https://i.imgur.com/b0hoB04.png)
+
 You can install the "Can UVIT" Python package using the following command.
 
 ```bash
