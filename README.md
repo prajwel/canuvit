@@ -1,17 +1,18 @@
-# To check the safety of a field to be observed with UVIT.
+# To check whether a field can be safely observed with UVIT.
 
-![](https://i.imgur.com/b0hoB04.png)
-
+<p align="center">
+<img src="https://i.imgur.com/b0hoB04.png" width="400"/>
+</p>
 You can install the "Can UVIT" Python package using the following command.
 
 ```bash
 pip install canuvit
 ``` 
 
-For example, 
+After installation, you can run `canuvit` on your terminal. For example, 
 ```python
-import canuvit
-canuvit.observe('uvit', '12:12:12', '12:12:12')
+>>> import canuvit
+>>> canuvit.observe('uvit', '12:12:12', '12:12:12')
 ```
 
 You should get an output as shown below. Also check the directory where the program is being run for the GALEX images with sources marked. 
