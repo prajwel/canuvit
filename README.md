@@ -9,11 +9,13 @@ You can install the "Can UVIT" Python package using the following command.
 pip install canuvit
 ``` 
 
-After installation, you can run `canuvit` on your terminal. For example, 
+After installation, you can run `canuvit` on a Python command prompt or as a script. For example, 
 ```python
 >>> import canuvit
 >>> canuvit.observe('uvit', '12:12:12', '12:12:12')
 ```
+
+> **Note:** In general, `canuvit.observe(instrument, RA, DEC)`. `instrument` can be either 'uvit', 'sxt', 'czti', or 'laxpc'. `RA` and `DEC` are expected to be in sexagesimal format. 
 
 You may get an output as shown below. Also, please check the directory where the program has run for the output GALEX images with sources marked. 
 
