@@ -17,7 +17,7 @@ After installation, you can run `canuvit` on a Python command prompt or as a scr
 
 > **Note:** In general, `canuvit.observe(instrument, RA, DEC)`. `instrument` can be either 'uvit', 'sxt', 'czti', or 'laxpc'. `RA` and `DEC` are expected to be in sexagesimal format. 
 
-You may get an output as shown below. Also, please check the directory where the program has run for the output GALEX images with sources marked. 
+You may get an output as shown below. Also, please check the working directory for the output GALEX images with sources marked. 
 
 ```
 ### VIS
@@ -70,3 +70,7 @@ Safe filters in FUV: ['CaF2', 'FUV-grating', 'BaF2', 'Sapphire', 'Silica']
 
 ```
 
+Two additional functions are also available which takes the same input arguments as `canuvit.observe()`.
+
+* `canuvit.observe_VIS()`: to find safe VIS filters.
+* `canuvit.observe_UV()`: to find safe UV filters.
