@@ -15,7 +15,8 @@ After installation, you can run `canuvit` on your terminal. For example,
 >>> canuvit.observe('uvit', '12:12:12', '12:12:12')
 ```
 
-You should get an output as shown below. Also check the directory where the program is being run for the GALEX images with sources marked. 
+You may get an output as shown below. Also, please check the directory where the program has run for the output GALEX images with sources marked. 
+
 ```
 ### VIS
 
