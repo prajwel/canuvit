@@ -1,9 +1,10 @@
-# To check whether a field can be safely observed with UVIT.
+# **CanUVIT**
+> To check whether a field can be safely observed with UVIT.
 
 <p align="center">
 <img src="https://i.imgur.com/b0hoB04.png" width="400"/>
 </p>
-You can install the "Can UVIT" Python package using the following command.
+You can install the "CanUVIT" Python package using the following command.
 
 ```bash
 pip install canuvit
