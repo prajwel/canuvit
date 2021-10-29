@@ -706,6 +706,7 @@ def format_fuv(fuv_counts):
     
 def observe_UV(instrument, RA, DEC):
     pointing_coo = SkyCoord(RA, DEC, unit = (u.hourangle, u.deg))
+    instrument = instrument.lower()
     
     # Check if source Galactic latitude is between -30 to 30.
     gal_lat = pointing_coo.galactic.b.value
