@@ -75,3 +75,13 @@ Two additional functions are also available which takes the same input arguments
 
 * `canuvit.observe_VIS()`: to find safe VIS filters.
 * `canuvit.observe_UV()`: to find safe UV filters.
+
+### Command Line Interface
+
+Once you have installed it you can access canuvit from the command line using either `python -m canuvit` or simply `canuvit`. Here's an example usage:
+
+    canuvit -r "12:12:12" -d "12:12:12"
+
+To know about more available options use:
+
+    canuvit -h
