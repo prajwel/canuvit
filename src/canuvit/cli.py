@@ -41,7 +41,7 @@ class OnceSameNameOption(click.Option):
 
 
 class CheckREParamType(click.ParamType):
-    def __init__(self, pattern: re.Pattern, name: str, humanpattern: str = None):
+    def __init__(self, pattern, name, humanpattern=None):
         super().__init__()
         self.name = name
         self.pattern = pattern
@@ -73,7 +73,8 @@ DECstr = CheckREParamType(DECre, "DEC", "[-]dd:mm:ss[.ss]")
     "context",
     flag_value="all",
     default=True,
-    help="Check safety for all filters. Default behaviour.",
+    help="Check safety for all filters.",
+    show_default=True,
     cls=OnceSameNameOption,
 )
 @click.option(
