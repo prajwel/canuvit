@@ -73,7 +73,8 @@ DECstr = CheckREParamType(DECre, "DEC", "[-]dd:mm:ss[.ss]")
     "context",
     flag_value="all",
     default=True,
-    help="Check safety for all filters. Default behaviour.",
+    help="Check safety for all filters.",
+    show_default=True,
     cls=OnceSameNameOption,
 )
 @click.option(
