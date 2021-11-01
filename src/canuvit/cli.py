@@ -41,7 +41,7 @@ class OnceSameNameOption(click.Option):
 
 
 class CheckREParamType(click.ParamType):
-    def __init__(self, pattern: re.Pattern, name: str, humanpattern: str = None):
+    def __init__(self, pattern, name, humanpattern=None):
         super().__init__()
         self.name = name
         self.pattern = pattern
