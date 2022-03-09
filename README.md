@@ -1,14 +1,18 @@
 # **CanUVIT**
 > To check whether a field can be safely observed with UVIT.
 
+<a href="https://pypi.org/project/canuvit/"><img src="https://img.shields.io/pypi/v/canuvit?color=262255"/></a>
+
 <p align="center">
 <img src="https://i.imgur.com/b0hoB04.png" width="400"/>
 </p>
 You can install the "CanUVIT" Python package using the following command.
 
 ```bash
-pip install canuvit
+pip install canuvit --upgrade
 ``` 
+	
+	IMPORTANT: Even if you have a version of CanUVIT installed, make sure you are using the latest version by running the above command.
 
 After installation, you can run `canuvit` on a Python command prompt or as a script. For example, 
 ```python
