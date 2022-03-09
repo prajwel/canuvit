@@ -89,3 +89,11 @@ Once you have installed it you can access canuvit from the command line using ei
 To know about more available options use:
 
     canuvit -h
+
+### Acknowledgements
+
+CanUVIT depends on the following for its proper functioning. 
+
+* Bright Source Warning Tool (https://uvit.iiap.res.in/Software/bswt)
+* Exposure Time Calculator (https://uvit.iiap.res.in/Software/etc)
+* MAST API (https://mast.stsci.edu/api/v0/) 
