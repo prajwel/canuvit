@@ -559,7 +559,7 @@ def td1_countfuv(flux):
 
 # Function to do all the work on TD1_catalogue.
 def td1_estimate(pointing_coo, instrument):
-    td1_catalogue = 'td1_catalogue.fits'
+    td1_catalogue = 'https://github.com/prajwel/canuvit/blob/main/src/canuvit/td1_catalogue.fits?raw=true'
     td1_hdu = fits.open(td1_catalogue)
     alpha = td1_hdu[1].data['ra']
     delta = td1_hdu[1].data['dec']
@@ -760,8 +760,8 @@ def observe_UV(instrument, RA, DEC):
             return
         else:
             # To read the TD1 catalogue.
-            td1_catalogue = 'td1_catalogue.fits'
-            td1_hdu = fits.open(td1_catalogue)
+#            td1_catalogue = 'td1_catalogue.fits'
+#            td1_hdu = fits.open(td1_catalogue)
             td1_estimate(pointing_coo, instrument)
             return
             
