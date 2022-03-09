@@ -722,12 +722,6 @@ def observe_UV(instrument, RA, DEC):
     obs_table = obs_table[obs_table['obs_collection'] == 'GALEX']
     obs_table = obs_table[obs_table['dataproduct_type'] == 'image']
 
-    # Post request.
-    session = Session()
-    response = session.post(url = 'http://galex.stsci.edu/GR6/?page=tilelist&survey=allsurveys',
-                            data = mastdata,
-                            headers = header)
-
     # To make sense of the mess that is MAST. 
     if len(obs_table) == 0:
         no_galex_tiles = '0 Galex tiles found. Galex observations around \
