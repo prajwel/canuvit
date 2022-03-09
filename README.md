@@ -12,7 +12,7 @@ You can install the "CanUVIT" Python package using the following command.
 pip install canuvit --upgrade
 ``` 
 	
-	IMPORTANT: Even if you have a version of CanUVIT installed, make sure you are using the latest version by running the above command.
+> **IMPORTANT:** Even if you have a version of CanUVIT installed, make sure you are using the latest version by running the above command.
 
 After installation, you can run `canuvit` on a Python command prompt or as a script. For example, 
 ```python
