@@ -1,28 +1,32 @@
 # **CanUVIT**
 > To check whether a field can be safely observed with UVIT.
 
-<a href="https://pypi.org/project/canuvit/"><img src="https://img.shields.io/pypi/v/canuvit?color=262255"/></a>
 
 <p align="center">
 <img src="https://i.imgur.com/b0hoB04.png" width="400"/>
 </p>
-You can install the "CanUVIT" Python package using the following command.
+You can install the CanUVIT Python package using the following command.
 
 ```bash
 pip install canuvit --upgrade
 ``` 
 	
-> **IMPORTANT:** Even if you have CanUVIT already installed, make sure you use the latest version by running the above command.
+> **IMPORTANT:** Even if you have CanUVIT already installed, make sure you use the latest version by running the above command. Current version of CanUVIT is shown on the badge below: 
 
-After installation, you can run `canuvit` on a Python command prompt or as a script. For example, 
+<a href="https://pypi.org/project/canuvit/"><img src="https://img.shields.io/pypi/v/canuvit?style=for-the-badge"/></a>
+
+
+After installation, you can run CanUVIT on a Python command prompt or as a script. For example, if your primary instrument is UVIT and the RA, DEC coordinates of the field are (12:12:12, 12:12:12),
+you may run the CanUVIT package as follows.
+
 ```python
 >>> import canuvit
 >>> canuvit.observe('uvit', '12:12:12', '12:12:12')
 ```
 
-> **Note:** In general, `canuvit.observe(instrument, RA, DEC)`. `instrument` can be either 'uvit', 'sxt', 'czti', or 'laxpc'. `RA` and `DEC` are expected to be in sexagesimal format. 
+> **Note:** In general, `canuvit.observe(instrument, RA, DEC)` where the `instrument` can be either 'uvit', 'sxt', 'czti', or 'laxpc' and `RA` and `DEC` field coordinates should be in sexagesimal format.
 
-You may get an output as shown below. Also, please check the working directory for the output GALEX images with sources marked. 
+For the above example, you should get an output as shown below. Please also check the working directory for the output GALEX images with sources marked in the primary instrument field of view.
 
 ```
 ### VIS
@@ -75,25 +79,66 @@ Safe filters in FUV: ['CaF2', 'FUV-grating', 'BaF2', 'Sapphire', 'Silica']
 
 ```
 
-Two additional functions are also available which takes the same input arguments as `canuvit.observe()`.
+Two additional functions are also available, which takes the same input arguments as `canuvit.observe()`.
 
 * `canuvit.observe_VIS()`: to find safe VIS filters.
 * `canuvit.observe_UV()`: to find safe UV filters.
 
 ### Command Line Interface
 
-Once you have installed it you can access canuvit from the command line using either `python -m canuvit` or simply `canuvit`. Here's an example usage:
+After installation with pip, you can also access CanUVIT from the command line. Here's an example:
 
-    canuvit -r "12:12:12" -d "12:12:12"
+```bash
+canuvit -i uvit -r "12:12:12" -d "12:12:12"
+```
+The help page of the command-line tool can be accessed as follows:
 
-To know about more available options use:
+```bash
+canuvit -h
+```
 
-    canuvit -h
+```
+Usage: canuvit [OPTIONS]
+
+  Program to check if a given coordinate can be safely observed using UVIT.
+
+  Example usage:
+  canuvit -r "13:12:14" -d "-14:15:13" 
+
+Options:
+  --all                           Check safety for all filters.  [default:
+                                  all]
+  --vis                           Check saftey for only visible filters.
+  --uv                            Check safety for only UV filters.
+  -r, --ra RA                     Right ascension of the coordinate. Format:
+                                  hh:mm:ss[.ss] e.g. "00:54:53.45"  [required]
+  -d, --dec DEC                   Declination of the coordinate. Format:
+                                  [-]dd:mm:ss[.ss] e.g. "-37:41:03.23".
+                                  [required]
+  -i, --instrument [uvit|sxt|czti|laxpc]
+                                  Instrument to check for.  [default: uvit]
+  -v, --verbose                   Increase output verbosity.
+  --version                       Show the version and exit.
+  -h, --help                      Show this message and exit.
+```
 
 ### Acknowledgements
 
-CanUVIT depends on the following for its proper functioning. 
+CanUVIT depends on the following web tools and API for its functioning. 
 
 * Bright Source Warning Tool (https://uvit.iiap.res.in/Software/bswt)
 * Exposure Time Calculator (https://uvit.iiap.res.in/Software/etc)
 * MAST API (https://mast.stsci.edu/api/v0/) 
+
+### Requirements
+
+CanUVIT works with Python 3.6 or later. CanUVIT depends on the following packages:
+
+* astropy
+* astroquery
+* beautifulsoup4
+* click
+* matplotlib
+* numpy
+* requests
+
