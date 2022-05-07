@@ -60,8 +60,8 @@ class CheckREParamType(click.ParamType):
         return value
 
 
-RAre = re.compile(r"^\d{2}:\d{2}:\d{2}(?:\.\d*)?$")
-DECre = re.compile(r"^(?:\+|\-)?\d{2}:\d{2}:\d{2}(?:\.\d*)?$")
+RAre = re.compile(r"^\d{1,2}:\d{1,2}:\d{1,2}(?:\.\d*)?$")
+DECre = re.compile(r"^(?:\+|\-)?\d{1,2}:\d{1,2}:\d{1,2}(?:\.\d*)?$")
 
 RAstr = CheckREParamType(RAre, "RA", "hh:mm:ss[.ss]")
 DECstr = CheckREParamType(DECre, "DEC", "[-]dd:mm:ss[.ss]")

@@ -11,9 +11,7 @@ You can install the CanUVIT Python package using the following command.
 pip install canuvit --upgrade
 ``` 
 	
-> **IMPORTANT:** Even if you have CanUVIT already installed, make sure you use the latest version by running the above command. Current version of CanUVIT is shown on the badge below: 
-
-<a href="https://pypi.org/project/canuvit/"><img src="https://img.shields.io/pypi/v/canuvit?style=for-the-badge"/></a>
+> **IMPORTANT:** Even if you have CanUVIT already installed, make sure you use the latest version by running the above command. Current version of CanUVIT is shown on the badge below: <br> <a href="https://pypi.org/project/canuvit/"><img src="https://img.shields.io/pypi/v/canuvit?style=for-the-badge"/></a>
 
 
 After installation, you can run CanUVIT on a Python command prompt or as a script. For example, if your primary instrument is UVIT and the RA, DEC coordinates of the field are (12:12:12, 12:12:12),
