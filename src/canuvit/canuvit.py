@@ -875,7 +875,7 @@ def observe_UV(instrument, RA, DEC):
         fuv_res = im_fuv_res
 
     # To select NUV safe filters.
-    print('\n\n### NUV\n\n{}\n'.format(nuv_res))
+    print('\n\n### NUV\n\n{}\n'.format(nuv_res.pprint_all()))
     nuv_filter_dict = {0: 'Silica', 1: 'NUV-B4', 2: 'NUV-B13', 3: 'NUV-B15', 4: 'NUV-N2'}
     i = 0
     nuv_safe = []
@@ -892,7 +892,7 @@ def observe_UV(instrument, RA, DEC):
 
 
     # To select FUV safe filters.
-    print('\n### FUV \n\n{}\n\n'.format(fuv_res))
+    print('\n### FUV \n\n{}\n\n'.format(fuv_res.pprint_all()))
     fuv_filter_dict = {0: 'CaF2', 1: 'BaF2', 2: 'Sapphire', 3: 'Silica'}
     j = 0
     fuv_safe = []
