@@ -300,9 +300,31 @@ def observe_VIS(instrument, RA, DEC):
     nd1list = np.round(nd1list, 1)
     bk7list = np.round(bk7list, 1)
 
-    all_together = np.array([ra_hms, dec_dms, cm, ct,
+    sl_no = np.arange(len(ra_hms)) + 1
+
+    vis_res = Table([sl_no, ra_hms, dec_dms, cm, ct,
                             spty, vs3list, vs2list,
-                            vs1list, nd1list, bk7list]).T
+                            vs1list, nd1list, bk7list],
+                    names = ('sl_no',
+                             'ra_hms',
+                             'dec_dms', 
+                             'mag',
+                             'B-V',
+                             'SpecType',
+                             'VIS3',
+                             'VIS2',
+                             'VIS1',
+                             'ND1',
+                             'BK7'), 
+                 meta = {'name': 'VIS counts'})     
+
+    vis_res['mag'].format = '.1f'
+    vis_res['B-V'].format = '.1f'
+    vis_res['VIS3'].format = '.1f'
+    vis_res['VIS2'].format = '.1f'
+    vis_res['VIS1'].format = '.1f'
+    vis_res['ND1'].format = '.1f'
+    vis_res['BK7'].format = '.1f'
 
     # To select safe filters.
     filter_dict = {0: 'VIS3', 
@@ -324,21 +346,15 @@ def observe_VIS(instrument, RA, DEC):
     proximity_check = np.array(sep) < proximity
     too_close = sum(proximity_check) / 2
 
+    # Output
+    print('\n=========================================================')
+    print('Payload: {}, Coordinates: {}'.format(instrument, RADEC))
+    print('=========================================================\n')
 
-    # Showing back the user inputs to user!
-    print('\nPayload: {}, Coordinates: {}\n'.format(instrument, RADEC))
+    print('### VIS\n')
+    vis_res.pprint_all()
 
-    #The usual mambo-jambo.    
-    print('\n\n### VIS\n')
-
-    print("ra_hms\tdec_dms\tmag\tB-V\tSpecType\tVIS3\tVIS2\tVIS1\tND1\tBK7\n")
-    for j in range(len(cm)):
-        print("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" %(
-              ra_hms[j], dec_dms[j], cm[j], ct[j], spty[j], 
-              vs3list[j], vs2list[j], vs1list[j], nd1list[j], 
-              bk7list[j]))
-
-    print("\n\nSafe filters: {}\n".format(safe_filters))
+    print("\nSafe filters: {}".format(safe_filters))
 
     if too_close > 0:
         print('\nWARNING! there exists {} pair of bright stars which are closer than\
@@ -359,6 +375,7 @@ def deg_to_hms(ra_deg, dec_deg):
     ra_hms, dec_dms = list(zip(*[hmdm.split(' ') for hmdm in ra_hms_dec_dms]))
     sl_no = np.arange(len(ra_hms)) + 1
     xy_tab = Table([sl_no, ra_hms, dec_dms], names = ('sl_no', 'ra_hms', 'dec_dms'))
+    
     return xy_tab
 
 # Functions to convert GALEX CPS to AB magnitude.
@@ -594,13 +611,13 @@ def td1_estimate(pointing_coo, instrument):
                             'n2'), 
                    meta = {'name': 'NUV counts'})
     
-    nuv_res['silica'].format = '4.1f'
-    nuv_res['b4'].format = '4.1f'
-    nuv_res['b13'].format = '4.1f'
-    nuv_res['b15'].format = '4.1f'
-    nuv_res['n2'].format = '4.1f'
+    nuv_res['silica'].format = '.1f'
+    nuv_res['b4'].format = '.1f'
+    nuv_res['b13'].format = '.1f'
+    nuv_res['b15'].format = '.1f'
+    nuv_res['n2'].format = '.1f'
     
-    print('\n\n### NUV\n\n{}\n'.format(nuv_res))
+    print('\n### NUV\n{}\n'.format(nuv_res))
     
     # To select NUV safe filters.
     nuv_filter_dict = {0: 'Silica', 1: 'NUV-B4', 2: 'NUV-B13', 3: 'NUV-B15', 4: 'NUV-N2'}
@@ -643,12 +660,12 @@ def td1_estimate(pointing_coo, instrument):
                             'silica'), 
                    meta = {'name': 'NUV counts'})
     
-    fuv_res['caf2'].format = '4.1f'
-    fuv_res['baf2'].format = '4.1f'
-    fuv_res['sapphire'].format = '4.1f'
-    fuv_res['silica'].format = '4.1f'
+    fuv_res['caf2'].format = '.1f'
+    fuv_res['baf2'].format = '.1f'
+    fuv_res['sapphire'].format = '.1f'
+    fuv_res['silica'].format = '.1f'
     
-    print('\n### FUV \n\n{}\n'.format(fuv_res))
+    print('\n### FUV \n{}\n'.format(fuv_res))
     
     # To select FUV safe filters.
     fuv_filter_dict = {0: 'CaF2', 1: 'BaF2', 2: 'Sapphire', 3: 'Silica'}
@@ -677,13 +694,13 @@ def format_nuv(nuv_counts):
                           'n2'), 
                  meta = {'name': 'NUV counts'})
 
-    ntab['Mag'].format = '4.2f'
-    ntab['Mag_corrected'].format = '4.2f'
-    ntab['silica'].format = '4.2f'
-    ntab['b4'].format = '4.2f'
-    ntab['b13'].format = '4.2f'
-    ntab['b15'].format = '4.2f'
-    ntab['n2'].format = '4.2f'
+    ntab['Mag'].format = '.1f'
+    ntab['Mag_corrected'].format = '.1f'
+    ntab['silica'].format = '.1f'
+    ntab['b4'].format = '.1f'
+    ntab['b13'].format = '.1f'
+    ntab['b15'].format = '.1f'
+    ntab['n2'].format = '.1f'
     return ntab
 
 # Function to format FUV data.
@@ -697,12 +714,12 @@ def format_fuv(fuv_counts):
                           'silica'), 
                  meta = {'name': 'FUV counts'})
 
-    ftab['Mag'].format = '4.2f'
-    ftab['Mag_corrected'].format = '4.2f'
-    ftab['caf2'].format = '4.2f'
-    ftab['baf2'].format = '4.2f'
-    ftab['sapphire'].format = '4.2f'
-    ftab['silica'].format = '4.2f'
+    ftab['Mag'].format = '.1f'
+    ftab['Mag_corrected'].format = '.1f'
+    ftab['caf2'].format = '.1f'
+    ftab['baf2'].format = '.1f'
+    ftab['sapphire'].format = '.1f'
+    ftab['silica'].format = '.1f'
     return ftab
     
 def observe_UV(instrument, RA, DEC):
@@ -727,11 +744,11 @@ def observe_UV(instrument, RA, DEC):
         no_galex_tiles = '0 Galex tiles found. Galex observations around \
                           \nthe given target is not available. Using TD1\
                           \ncatalogue to estimate UVIT count rates.'
-        print('\n\n{}\n\n'.format(no_galex_tiles))
+        print('\n{}\n'.format(no_galex_tiles))
         if gal_plane == 'yes':
             gal_plane_warning = 'The galactic latitude is between -30 to 30. \
                                 \nYour field cannot be checked using TD1 catalogue!'
-            print('\n\n{}\n\n'.format(gal_plane_warning))
+            print('\n{}\n'.format(gal_plane_warning))
             return
         else:
             # To read the TD1 catalogue.
@@ -875,7 +892,7 @@ def observe_UV(instrument, RA, DEC):
         fuv_res = im_fuv_res
 
     # To select NUV safe filters.
-    print('\n\n### NUV\n')
+    print('\n### NUV\n')
     nuv_res.pprint_all()
     nuv_filter_dict = {0: 'Silica', 1: 'NUV-B4', 2: 'NUV-B13', 3: 'NUV-B15', 4: 'NUV-N2'}
     i = 0
@@ -889,11 +906,11 @@ def observe_UV(instrument, RA, DEC):
         i = i + 1
 
     nuv_declaration = 'Safe filters in NUV: {}'.format(nuv_safe)
-    print('\n\n{}\n'.format(nuv_declaration))
+    print('\n{}'.format(nuv_declaration))
 
 
     # To select FUV safe filters.
-    print('\n\n### FUV\n')
+    print('\n### FUV\n')
     fuv_res.pprint_all()
     fuv_filter_dict = {0: 'CaF2', 1: 'BaF2', 2: 'Sapphire', 3: 'Silica'}
     j = 0
@@ -907,7 +924,7 @@ def observe_UV(instrument, RA, DEC):
         j = j + 1
 
     fuv_declaration = 'Safe filters in FUV: {}'.format(fuv_safe)
-    print('\n\n{}\n'.format(fuv_declaration))
+    print('\n{}\n'.format(fuv_declaration))
 
 def observe(instrument, RA, DEC):
     observe_VIS(instrument, RA, DEC)
