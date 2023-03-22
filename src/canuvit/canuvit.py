@@ -277,7 +277,7 @@ def observe_VIS(instrument, RA, DEC):
 
     # To convert ra_deg and dec_deg to ra_hms and dec_dms.
     coord = SkyCoord(list(zip(ra_deg, dec_deg)), frame = 'icrs', unit = 'deg')
-    RAhms_DECdms = coord.to_string('hmsdms', sep = ':')
+    RAhms_DECdms = coord.to_string('hmsdms', sep = ':', precision=1)
     ra_hms, dec_dms = zip(*[hmdm.split(' ') for hmdm in RAhms_DECdms])
 
     # Conversion to numpy arrays. 
@@ -346,12 +346,7 @@ def observe_VIS(instrument, RA, DEC):
     proximity_check = np.array(sep) < proximity
     too_close = sum(proximity_check) / 2
 
-    # Output
-    print('\n=========================================================')
-    print('Payload: {}, Coordinates: {}'.format(instrument, RADEC))
-    print('=========================================================\n')
-
-    print('### VIS\n')
+    print('\n### VIS\n')
     vis_res.pprint_all()
 
     print("\nSafe filters: {}".format(safe_filters))
@@ -371,7 +366,7 @@ def deg_to_hms(ra_deg, dec_deg):
                      frame = 'icrs',
                      unit = 'deg')
     
-    ra_hms_dec_dms = fuv_coord.to_string('hmsdms', sep = ':')
+    ra_hms_dec_dms = fuv_coord.to_string('hmsdms', sep = ':', precision=1)
     ra_hms, dec_dms = list(zip(*[hmdm.split(' ') for hmdm in ra_hms_dec_dms]))
     sl_no = np.arange(len(ra_hms)) + 1
     xy_tab = Table([sl_no, ra_hms, dec_dms], names = ('sl_no', 'ra_hms', 'dec_dms'))
@@ -464,7 +459,7 @@ def im_flux(int_map, pointing_coo, instrument, m_ra, m_dec):
     try:
         hdu = fits.open(int_map, cache = False)
     except IOError:
-        print('Incomplete FITS file. Check if Galex Servers are working properly.')
+        print('Incomplete FITS file. Please try again.')
 
     # To convert RA & DEC to pixel coordinates.
     w = WCS(hdu[0].header)
@@ -617,7 +612,8 @@ def td1_estimate(pointing_coo, instrument):
     nuv_res['b15'].format = '.1f'
     nuv_res['n2'].format = '.1f'
     
-    print('\n### NUV\n{}\n'.format(nuv_res))
+    print('\n### NUV\n')
+    nuv_res.pprint_all()    
     
     # To select NUV safe filters.
     nuv_filter_dict = {0: 'Silica', 1: 'NUV-B4', 2: 'NUV-B13', 3: 'NUV-B15', 4: 'NUV-N2'}
@@ -632,7 +628,7 @@ def td1_estimate(pointing_coo, instrument):
         i = i + 1
     
     nuv_declaration = 'Safe filters in NUV: {}'.format(nuv_safe)
-    print('\n{}\n'.format(nuv_declaration))
+    print('\n{}'.format(nuv_declaration))
     
     # FUV 
     refined_set = [(al, de, ff) for al, de, ff 
@@ -665,7 +661,8 @@ def td1_estimate(pointing_coo, instrument):
     fuv_res['sapphire'].format = '.1f'
     fuv_res['silica'].format = '.1f'
     
-    print('\n### FUV \n{}\n'.format(fuv_res))
+    print('\n### FUV\n')
+    fuv_res.pprint_all()       
     
     # To select FUV safe filters.
     fuv_filter_dict = {0: 'CaF2', 1: 'BaF2', 2: 'Sapphire', 3: 'Silica'}
@@ -680,7 +677,7 @@ def td1_estimate(pointing_coo, instrument):
         j = j + 1
     
     fuv_declaration = 'Safe filters in FUV: {}'.format(fuv_safe)
-    print('\n{}\n'.format(fuv_declaration))
+    print('\n{}'.format(fuv_declaration))
         
 # Function to format NUV data.
 def format_nuv(nuv_counts):
@@ -744,11 +741,11 @@ def observe_UV(instrument, RA, DEC):
         no_galex_tiles = '0 Galex tiles found. Galex observations around \
                           \nthe given target is not available. Using TD1\
                           \ncatalogue to estimate UVIT count rates.'
-        print('\n{}\n'.format(no_galex_tiles))
+        print('\n{}'.format(no_galex_tiles))
         if gal_plane == 'yes':
             gal_plane_warning = 'The galactic latitude is between -30 to 30. \
                                 \nYour field cannot be checked using TD1 catalogue!'
-            print('\n{}\n'.format(gal_plane_warning))
+            print('\n{}'.format(gal_plane_warning))
             return
         else:
             # To read the TD1 catalogue.
@@ -774,11 +771,11 @@ def observe_UV(instrument, RA, DEC):
         try:
             cat_hdu = fits.open(catalogue_link[0], cache = False)
         except IOError:
-            incomplete_fits = 'Incomplete FITS file. Check if Galex Servers are working properly.'
-            print('\n{}\n'.format(incomplete_fits))
+            incomplete_fits = 'Incomplete FITS file. Please try again.'
+            print('\n{}'.format(incomplete_fits))
     else:
         no_catalogue = 'Could not find the catalogue for this region.'
-        print('\n{}\n'.format(no_catalogue))
+        print('\n{}'.format(no_catalogue))
         
     alpha = cat_hdu[1].data['alpha_j2000_merged']
     delta = cat_hdu[1].data['delta_j2000_merged']
@@ -850,8 +847,8 @@ def observe_UV(instrument, RA, DEC):
             elif detector == 'n':
                 nuv_intmap = image_link
             else: 
-                filter_confusion = 'Cannot determine filter! exiting.'
-                print('\n{}\n'.format(filter_confusion))
+                filter_confusion = 'Cannot determine filter! Exiting.'
+                print('\n{}'.format(filter_confusion))
                 
     # NUV
     if 'nuv_intmap' in locals():
@@ -924,9 +921,14 @@ def observe_UV(instrument, RA, DEC):
         j = j + 1
 
     fuv_declaration = 'Safe filters in FUV: {}'.format(fuv_safe)
-    print('\n{}\n'.format(fuv_declaration))
+    print('\n{}'.format(fuv_declaration))
 
 def observe(instrument, RA, DEC):
+
+    print('\n=========================================================')
+    print('Payload: {}, Coordinates: {}, {}'.format(instrument, RA, DEC))
+    print('=========================================================')
+    
     observe_VIS(instrument, RA, DEC)
     observe_UV(instrument, RA, DEC)
         
