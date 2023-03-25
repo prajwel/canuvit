@@ -1,17 +1,22 @@
 # **CanUVIT**
 > To check whether a field can be safely observed with UVIT.
 
-
 <p align="center">
 <img src="https://i.imgur.com/b0hoB04.png" width="400"/>
 </p>
+
+
 You can install the CanUVIT Python package using the following command.
 
 ```bash
 pip install canuvit --upgrade
 ``` 
 	
-> **IMPORTANT:** Even if you have CanUVIT already installed, make sure you use the latest version by running the above command. Current version of CanUVIT is shown on the badge below: <br> <a href="https://pypi.org/project/canuvit/"><img src="https://img.shields.io/pypi/v/canuvit?style=for-the-badge"/></a>
+> **IMPORTANT:** Even if you have CanUVIT already installed, make sure you use the latest version by running the above command. Current version of CanUVIT is shown on the badge below: <br> <a href="https://pypi.org/project/canuvit/"><img src="https://img.shields.io/pypi/v/canuvit?style=for-the-badge"/></a> <br>
+
+> **Note:** If you don't want to install CanUVIT or are facing problems during installation, You can run it online using Binder: 
+<br> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/prajwel/UVIT_notebooks/main?labpath=notebook2_UVIT_VIS_UV_safety_check.ipynb)
+
 
 
 After installation, you can run CanUVIT on a Python command prompt or as a script. For example, if your primary instrument is UVIT and the RA, DEC coordinates of the field are (12:12:12, 12:12:12),
