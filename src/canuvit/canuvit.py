@@ -349,10 +349,10 @@ def observe_VIS(instrument, RA, DEC):
     print('\n### VIS\n')
     vis_res.pprint_all()
 
-    print("\nSafe filters: {}".format(safe_filters))
+    print("\nSafe filters in VIS: {}".format(safe_filters))
 
     if too_close > 0:
-        print('\nWARNING! there exists {} pair of bright stars which are closer than\
+        print('\nWARNING! There exists {} pair of bright stars which are closer than\
               \n{} arcseconds!'.format(too_close, proximity))
 
 # Function to find seperation in celestial coordinates.
