@@ -9,6 +9,7 @@ DEFAULT_INSTRUMENT = "uvit"
 
 observe_func = {"all": observe, "vis": observe_VIS, "uv": observe_UV}
 
+
 # Mutually exclusive click option: from https://stackoverflow.com/questions/49387833/prohibit-passing-several-feature-switches-in-python-click
 class OnceSameNameOption(click.Option):
     def add_to_parser(self, parser, ctx):
@@ -112,7 +113,7 @@ DECstr = CheckREParamType(DECre, "DEC", "[-]dd:mm:ss[.ss]")
     "--instrument",
     type=click.Choice(INSTRUMENT_CHOICES),
     default=DEFAULT_INSTRUMENT,
-    help=f"Instrument to check for.",
+    help="Instrument to check for.",
     show_default=True,
 )
 @click.option("-v", "--verbose", count=True, help="Increase output verbosity.")
