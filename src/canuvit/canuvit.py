@@ -751,7 +751,13 @@ def observe_UV(instrument, RA, DEC):
             # To read the TD1 catalogue.
             td1_estimate(pointing_coo, instrument)
             return
-            
+
+    if len(obs_table) > 1:
+        obs_table_coo= SkyCoord(obs_table['s_ra'], obs_table['s_dec'], unit = u.deg)
+        obs_table_offsets = pointing_coo.separation(obs_table_coo)
+        sort_indices = np.argsort(obs_table_offsets.degree)
+        obs_table = obs_table[sort_indices]
+                
     data_products = Observations.get_product_list(obs_table[0])
     data_products = data_products[data_products['productGroupDescription'] == 'Minimum Recommended Products']
 
