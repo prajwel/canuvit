@@ -151,7 +151,12 @@ def observe_VIS(instrument, RA, DEC):
         except (exceptions.RequestException, AttributeError):
             try_value = try_value + 1
             if try_value == 50:
-                print("Check your network, Theia tried 50 times without a luck")
+                print(
+                    """\nCanUVIT attempted access to the BSWT online tool 50 times without success. Please check:
+
+    1. Your internet connection.
+    2. Accessibility of uvit.iiap.res.in."""
+                )
                 return None
 
     bswt_soup = BeautifulSoup(bswt_html.text, "html.parser")
@@ -243,7 +248,12 @@ def observe_VIS(instrument, RA, DEC):
             except (exceptions.RequestException, AttributeError):
                 try_value = try_value + 1
                 if try_value == 50:
-                    print("Check your network, Theia tried 50 times without a luck")
+                    print(
+                        """\nCanUVIT attempted access to the ETC online tool 50 times without success. Please check:
+
+    1. Your internet connection.
+    2. Accessibility of uvit.iiap.res.in."""
+                    )
                     return None
 
         # retrieving required values using soup
