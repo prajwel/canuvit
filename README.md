@@ -33,7 +33,7 @@ For the above example, you should get an output as shown below. Please also chec
 
 ```
 =========================================================
-Payload: uvit, Coordinates: 12:12:12, 12:12:12
+Instrument: uvit, Coordinates: 12:12:12, 12:12:12
 =========================================================
 
 ### VIS
