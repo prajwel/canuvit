@@ -1,0 +1,14 @@
+abstract: To carry out UVIT safety checks
+authors:
+- family-names: Prajwel Joseph
+- affiliation: Indian Institute of Astrophysics
+  family-names: Sriram Krishna
+cff-version: 1.2.0
+date-released: '2024-01-02'
+doi: 10.5281/zenodo.10450289
+license:
+- cc-by-4.0
+repository-code: https://github.com/prajwel/canuvit/tree/v0.5.0
+title: 'prajwel/canuvit: v0.5.0'
+type: software
+version: v0.5.0
