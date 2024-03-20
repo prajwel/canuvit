@@ -78,6 +78,8 @@ Safe filters in FUV: ['CaF2', 'FUV-grating', 'BaF2', 'Sapphire', 'Silica']
 
 Please choose the VIS filters such that none of the stars in the field gives >4800 counts/second. Further, for good tracking of the aspect, there should be at least two stars within a 12 arcminute radius of the target with >30 counts/second (for good S/N) and <1000 counts/second (to avoid saturation) in the chosen filter. Please also avoid configuring multiple VIS filters. 
 
+> **Note:** You will receive a warning if there are pairs of stars that are closer than 10 arcseconds in the VIS channel. In such cases, ensure the total count rate from the pairs of stars does not exceed the 4800 counts/seconds limit.
+
 Two additional functions are also available, which takes the same input arguments as `canuvit.observe()`.
 
 * `canuvit.observe_VIS()`: to find safe VIS filters.
