@@ -29,16 +29,18 @@ you may run the CanUVIT package as follows.
 
 > **Note:** In general, `canuvit.observe(instrument, RA, DEC)` where the `instrument` can be either 'uvit', 'sxt', 'czti', or 'laxpc' and `RA` and `DEC` field coordinates should be in sexagesimal format.
 
+> **IMPORTANT:** Make sure you choose the correct **primary instrument**. Incorrect choice of `instrument` may lead to proposal rejection.
+
 For the above example, you should get an output as shown below. Please also check the working directory for the output GALEX images with sources marked in the primary instrument field of view.
 
 ```
-=========================================================
-Instrument: uvit, Coordinates: 12:12:12, 12:12:12
-=========================================================
+===================================================================
+Primary instrument: UVIT, Coordinates: 12:12:12, 12:12:12
+===================================================================
 
 ### VIS
 
-sl_no   ra_hms     dec_dms   mag  B-V SpecType  VIS3   VIS2  VIS1 ND1   BK7  
+sl_no   ra_hms     dec_dms   mag  B-V SpecType  VIS3   VIS2  VIS1 ND1   BK7
 ----- ---------- ----------- ---- --- -------- ------ ----- ----- ---- ------
     1 12:11:52.8 +12:07:47.5 11.1 0.9       K1 1333.0 124.4  88.6 29.7 1624.9
     2 12:12:22.9 +12:17:23.9 11.1 0.8       K0 1296.7 121.0  86.2 28.9 1580.6
