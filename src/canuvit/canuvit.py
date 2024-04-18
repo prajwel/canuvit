@@ -1014,9 +1014,9 @@ def observe_UV(instrument, RA, DEC):
 
 
 def observe(instrument, RA, DEC):
-    print("\n=========================================================")
-    print("Instrument: {}, Coordinates: {}, {}".format(instrument, RA, DEC))
-    print("=========================================================")
+    print("\n===================================================================")
+    print("Primary instrument: {}, Coordinates: {}, {}".format(instrument.upper(), RA, DEC))
+    print("===================================================================")
 
     observe_VIS(instrument, RA, DEC)
     observe_UV(instrument, RA, DEC)
