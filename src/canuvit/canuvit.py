@@ -3,13 +3,9 @@
 
 import warnings
 import numpy as np
-from io import BytesIO
-import matplotlib
-
-# Force matplotlib to not use any Xwindows backend.
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from io import BytesIO
 from bs4 import BeautifulSoup
 from astropy.io import fits
 from astropy.wcs import WCS
@@ -32,91 +28,54 @@ flux_norm = 2e-13
 
 
 # To convert B-V to Spectral Type (reference: http://www.stsci.edu/~inr/intrins.html)
-def spectype(f):
-    if f >= 1.511:
-        return "M4"
-    elif f >= 1.486:
-        return "M3"
-    elif f >= 1.421:
-        return "M1"
-    elif f >= 1.351:
-        return "M0"
-    elif f >= 1.241:
-        return "K7"
-    elif f >= 1.076:
-        return "K5"
-    elif f >= 0.976:
-        return "K4"
-    elif f >= 0.936:
-        return "K3"
-    elif f >= 0.891:
-        return "K2"
-    elif f >= 0.836:
-        return "K1"
-    elif f >= 0.776:
-        return "K0"
-    elif f >= 0.711:
-        return "G8"
-    elif f >= 0.666:
-        return "G5"
-    elif f >= 0.641:
-        return "G3"
-    elif f >= 0.616:
-        return "G2"
-    elif f >= 0.566:
-        return "G0"
-    elif f >= 0.491:
-        return "F8"
-    elif f >= 0.401:
-        return "F5"
-    elif f >= 0.346:
-        return "F2"
-    elif f >= 0.331:
-        return "F1"
-    elif f >= 0.311:
-        return "F0"
-    elif f >= 0.286:
-        return "A9"
-    elif f >= 0.236:
-        return "A8"
-    elif f >= 0.186:
-        return "A7"
-    elif f >= 0.161:
-        return "A6"
-    elif f >= 0.136:
-        return "A5"
-    elif f >= 0.101:
-        return "A4"
-    elif f >= 0.066:
-        return "A3"
-    elif f >= 0.036:
-        return "A2"
-    elif f >= 0.006:
-        return "A1"
-    elif f >= -0.039:
-        return "A0"
-    elif f >= -0.089:
-        return "B9"
-    elif f >= -0.119:
-        return "B8"
-    elif f >= -0.134:
-        return "B7"
-    elif f >= -0.149:
-        return "B6"
-    elif f >= -0.169:
-        return "B5"
-    elif f >= -0.189:
-        return "B4"
-    elif f >= -0.219:
-        return "B3"
-    elif f >= -0.249:
-        return "B2"
-    elif f >= -0.279:
-        return "B1"
-    elif f < -0.279:
-        return "B0"
-    else:
-        print("out of bounds")
+def spectral_type_from_color(f):
+    colors_types = [
+        (1.511, "M4"),
+        (1.486, "M3"),
+        (1.421, "M1"),
+        (1.351, "M0"),
+        (1.241, "K7"),
+        (1.076, "K5"),
+        (0.976, "K4"),
+        (0.936, "K3"),
+        (0.891, "K2"),
+        (0.836, "K1"),
+        (0.776, "K0"),
+        (0.711, "G8"),
+        (0.666, "G5"),
+        (0.641, "G3"),
+        (0.616, "G2"),
+        (0.566, "G0"),
+        (0.491, "F8"),
+        (0.401, "F5"),
+        (0.346, "F2"),
+        (0.331, "F1"),
+        (0.311, "F0"),
+        (0.286, "A9"),
+        (0.236, "A8"),
+        (0.186, "A7"),
+        (0.161, "A6"),
+        (0.136, "A5"),
+        (0.101, "A4"),
+        (0.066, "A3"),
+        (0.036, "A2"),
+        (0.006, "A1"),
+        (-0.039, "A0"),
+        (-0.089, "B9"),
+        (-0.119, "B8"),
+        (-0.134, "B7"),
+        (-0.149, "B6"),
+        (-0.169, "B5"),
+        (-0.189, "B4"),
+        (-0.219, "B3"),
+        (-0.249, "B2"),
+        (-0.279, "B1"),
+        (-float("inf"), "B0"),  # Use negative infinity to cover all lower bounds
+    ]
+
+    for color, spectral_type in colors_types:
+        if f >= color:
+            return spectral_type
 
 
 def observe_VIS(instrument, RA, DEC):
@@ -186,7 +145,7 @@ def observe_VIS(instrument, RA, DEC):
     ra_deg = ra_deg[0:7]
     dec_deg = dec_deg[0:7]
     fct = map(float, list(ct))
-    spty = list(map(spectype, fct))
+    spty = list(map(spectral_type_from_color, fct))
 
     # iteratively inputing parameters to etc.
     vs3list = []
@@ -1015,7 +974,11 @@ def observe_UV(instrument, RA, DEC):
 
 def observe(instrument, RA, DEC):
     print("\n===================================================================")
-    print("Primary instrument: {}, Coordinates: {}, {}".format(instrument.upper(), RA, DEC))
+    print(
+        "Primary instrument: {}, Coordinates: {}, {}".format(
+            instrument.upper(), RA, DEC
+        )
+    )
     print("===================================================================")
 
     observe_VIS(instrument, RA, DEC)
