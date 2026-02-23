@@ -1,3 +1,3 @@
-import pkg_resources
+from importlib.metadata import version
 
-__version__ = pkg_resources.require("canuvit")[0].version
+__version__ = version("canuvit")
