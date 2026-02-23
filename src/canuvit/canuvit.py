@@ -102,7 +102,7 @@ def observe_VIS(instrument, RA, DEC):
     while got_response is False:
         try:
             bswt_html = uvit_session.post(
-                url="https://uvit.iiap.res.in/cgi-bin/bswt.pl",
+                url="http://uvit.iiap.res.in/cgi-bin/bswt.pl",
                 data=bswt_data,
                 verify=False,
             )
@@ -120,9 +120,7 @@ def observe_VIS(instrument, RA, DEC):
 
     bswt_soup = BeautifulSoup(bswt_html.text, "html.parser")
     text_output_link = bswt_soup.find("a", href=True)
-    text_output = uvit_session.get(
-        "https://uvit.iiap.res.in" + text_output_link["href"]
-    )
+    text_output = uvit_session.get("http://uvit.iiap.res.in" + text_output_link["href"])
     bswt_data = np.genfromtxt(
         BytesIO(bytes(text_output.text, "UTF-8")), skip_header=10, invalid_raise=False
     )
@@ -198,7 +196,7 @@ def observe_VIS(instrument, RA, DEC):
         while got_response is False:
             try:
                 response = session.post(
-                    url="https://uvit.iiap.res.in/cgi-bin/etc.pl",
+                    url="http://uvit.iiap.res.in/cgi-bin/etc.pl",
                     data=etcdata,
                     verify=False,
                 )
